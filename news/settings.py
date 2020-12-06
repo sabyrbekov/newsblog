@@ -28,7 +28,7 @@ SECRET_KEY = '&8&du(u4!2g53q#1!+pap*b&n_a9awziyg%y@0p*xmoo@l19-a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['newsblog.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 
 # Application definition
