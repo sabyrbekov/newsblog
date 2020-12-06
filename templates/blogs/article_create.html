@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}
+    Создать статью
+{% endblock %}
+
+    {% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+        <form action="{% url 'articles_app:article_create' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit"> Create Article</button>
+        </form>
+        </div>
+    {% endif %}
+    {% endblock content %}

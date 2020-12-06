@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}
+    Изменить
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="container">
+    <form action="{% url 'articles_app:article_edit' pk=object.pk %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> ОБНОВИТЬ СТАТЬЮ </button>
+    </form>
+    </div>
+{% endif %}
+{% endblock content %}

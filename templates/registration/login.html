@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}
+    Вход
+{% endblock %}
+{% block content %}
+    {% if form.errors %}
+    <p>Ваше имя пользователя и пароль не совпадают. Повторите попытку.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated  %}
+        <p>У вашей учетной записи нет доступа к этой странице. 
+        Продолжить.     </p>
+        {% else %}
+            Пожалуйста, войдите, чтобы увидеть эту страницу
+        {% endif %}
+    {% endif %}
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div>
+            <td>{{form.username.label_tag}}</td>
+            <td>{{form.username}}</td>
+        </div>
+        <div>
+            <td>{{form.password.label_tag}}</td>
+            <td>{{form.password}}</td>
+        </div>
+        <div>
+            <input type="submit" value="login">
+            <input type="hidden" name="next" value="{{next}}">
+        </div>
+    </form>
+    <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+    {% endblock content %}

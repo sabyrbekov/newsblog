@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+	
+	<!-- Banner -->
+	<section id="banner">
+		<div class="content">
+			<h2>ПРИВЕТСТВУЮ</h2>
+			<p>cвежие и надежные новости</p>
+			<a href="#main" class="button scrolly">Поехали !!!</a>
+		</div>
+	</section>
+	<h1>hello world</h1>  
+	
+    			<!-- Main -->
+				<section id="main">
+					<div class="container">
+						<div class="row gtr-200">
+							<div class="col-12">
+									<section class="box blog">
+										<h2 class="major"><span>Последние новости</span></h2>
+										<div>
+											<div class="row"> 
+												<div class="col-9 col-12-medium">
+													{% for article in articles %}
+													<div class="content">
+														<!-- Featured Post -->
+															<article class="box post">
+																<header>
+																	<h3><a href="{% url 'articles_app:article_detail' pk=article.pk%}">
+																		{{ article.title}}
+
+																	</a></h3>
+																	<p></p>
+																	<ul class="meta">
+																		<li class="icon fa-clock">{{ article.created_date }}</li>
+																	</ul>
+																	<h4>{{ article.article_category }}</h4>
+																</header>
+																<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+																<p>
+																	{{ article.content|truncatewords:30 }}
+																</p>
+																{% if article.image %}
+            															<img width="600" src="{{ article.image.url }}" alt="">
+																{% endif %}
+
+																<p><a href="{% url 'articles_app:article_detail' pk=article.pk%}" class="button">Читать...</a></p>
+															</article>
+													</div>
+													{% endfor %}
+												</div>
+												<div class="col-3 col-12-medium">
+													<div class="sidebar">
+
+														<!-- Archives -->
+												
+															{% if user.is_authenticated %}
+															<ul class="divided">
+																<article class="box post-summary">
+																<header id="header">
+																		<div>
+																			<a href="{% url 'users:profile' %}" class="button">Перейти к профилю</a>
+																		</div>
+																</header>
+																</article>
+																<article class="box post-summary">
+																<header id="header">
+																		<div>
+																			<a href="{% url 'password_reset' %}" class="button">Поменять пароль</a>
+																		</div>
+																</header>
+																</article>	
+																<article class="box post-summary">
+																<header id="header">
+																		<div>
+																			<a href="{% url 'articles_app:article_create' %}" class="button">Создать статью</a>
+																		</div>
+																</header>
+																</article>
+															</ul>
+															{% endif %}
+														</div>
+													</div>
+												</div>
+										</div>
+									</section>
+
+							</div>
+						</div>
+					</div>
+				</section>
+				<div class="container mt-5">
+					<div class="row">
+						<div class="col-6 offset-md-2">
+							{% if is_paginated %}
+							<nav aria-label="Page navigation example">
+								<ul class="pagination">
+								{% if page_obj.has_previous %}
+									<li class="page-item" ><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+								{% else %}
+									<li class="page-item"><span>&laquo;</span></li>
+								{% endif %}
+
+								{% for i in paginator.page_range %}
+									{% if page_obj.number == i %}
+									<li class="page-item active" aria-current="page">
+										<span>{{ i }} <span class="sr-only">(current)</span></span>
+									</li>
+									{% else %}
+									<li class="page-item"><a href="?page={{ i }}">{{ i }}</a></li>
+									{% endif %}
+								{% endfor %}
+
+								{% if page_obj.has_next %}
+									<li class="page-item"><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+								{% else %}
+									<li class="disabled"><span>&raquo;</span></li>
+								{% endif %}
+								</ul>
+							</nav>
+							{% endif %}
+						</div>
+					</div>	
+				</div>	
+{% endblock content %}

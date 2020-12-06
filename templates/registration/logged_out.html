@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}
+    Выход
+{% endblock %}
+{% block content %}
+    <div>
+        <h2><p>Вы вышли</p></h2>
+        <h2>
+            <a class="button" href="{% url 'login' %}">
+                Кликните сюда, чтобы обратно войти! 
+            </a>
+        </h2>
+    </div>
+{% endblock content %}

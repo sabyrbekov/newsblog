@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title%}
+    Поиск
+{% endblock %}
+     {% block content %}
+        <div class="container">
+        <form action="{% url 'articles_app:search_results'%}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <ul>
+                {% for article in articles %}
+                <div class="content">
+                    <!-- Featured Post -->
+                        <article class="box post">
+                            <header>
+                                <h3><a href="{% url 'articles_app:article_detail' pk=article.pk%}">
+                                    {{ article.title}}
+                                </a></h3>
+                                <p></p>
+                                <ul class="meta">
+                                    <li class="icon fa-clock">{{ article.created_date }}</li>
+                                    <!-- <li class="icon fa-comments"><a href="#">8</a></li> -->
+                                </ul>
+                                
+                            </header>
+                            <a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+                            <p>
+                                {{ article.content|truncatewords:30 }}
+                            </p>
+                            
+                            {% if article.image %}
+                                    <img width="600" src="{{ article.image.url }}" alt="">
+                            {% endif %}
+
+                            <p><a href="{% url 'articles_app:article_detail' pk=article.pk%}" class="button">Читать...</a></p>
+                        </article>
+                    
+
+                </div>
+                {% endfor %}
+            </ul>
+        </form>
+        </div>
+
+    {% endblock content %}

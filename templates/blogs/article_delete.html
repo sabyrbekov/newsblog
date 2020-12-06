@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}
+    Удалить статью
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+        <div class="container">
+            <h3>Вы уверены, что хотите удалить данную статью?</h3>
+            <h6>(статья будет удалена)</h6>
+            <button type="submit"><a href="{% url 'articles_app:article_detail'  pk=object.pk%}">Назад</a></button>
+        
+        <h1><p></p></h1>
+        <h1><p></p></h1>
+        <h1><p></p></h1>
+        
+        <form action="{% url 'articles_app:article_delete' pk=object.pk %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <h3><b>"{{ object.title|title }}"</b></h3> 
+                <h3><b>{{ object.content }}</b></h3>
+                <button type="submit"> Всё равно удалить!</button>
+        </form>
+        </div>
+{% endif %}
+{% endblock content %}
+
+
+   
+    
+    <button type="submit" name="button" class="btn btn-danger">Delete</button>

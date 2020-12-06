@@ -1,0 +1,104 @@
+{% load static %}
+<html>
+	<head>
+		<title>{% block title %} Главная {% endblock title %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<div class="logo container">
+						<div>
+							<h1><a href="{% url 'articles_app:article_list' %}" id="logo">NEWS</a></h1>
+							<p><--ПЕРЕХОДИ НА ГЛАВНУЮ</p>
+						</div>
+					</div>
+				</header>
+
+			<!-- Nav -->
+			<li class="nav-item">
+				
+				<nav id="nav">
+					<ul>
+						<li class="current"><a href="{% url 'articles_app:article_list' %}">Главная</a></li>
+						<li><a href="{% url 'articles_app:kg_article_list' %}">Кыргызстан</a></li>
+						<li><a href="{% url 'articles_app:world_article_list' %}">Мир</a></li>
+						<li><a href="{% url 'articles_app:sport_article_list' %}">Спорт</a></li>
+						<li>
+							<form class="form-inline my-2 my-lg-0" action="{% url 'articles_app:search_results' %}">
+							<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">ИСКАТЬ НОВОСТЬ</button>
+							</form>	
+						</li>
+						{% if user.is_authenticated %}
+						<li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+						{% else %}
+						<li><a class="dropdown-item" href="{% url 'users:register' %}">Регистрация</a></li>
+						<li><a class="dropdown-item" href="{% url 'login' %}">Войти</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+
+			{% block content %}
+
+			{% endblock content %}
+            <!-- Footer -->
+				<footer id="footer">
+					<div class="container">
+						<div class="row gtr-200">
+							<div class="col-12">
+
+								<!-- About -->
+									<section>
+										<h2 class="major"><span>Кто мы такие ?</span></h2>
+										<p>
+											Это новостной сайт <strong>News</strong>, 
+											И это только начало :)
+										</p>
+									</section>
+
+							</div>
+							<div class="col-12">
+
+								<!-- Contact -->
+									<section>
+										<h2 class="major"><span>Get in touch</span></h2>
+										<ul class="contact">
+											<li><a class="icon brands fa-facebook-f" href="https://www.facebook.com/profile.php?id=100033334355500"><span class="label">Facebook</span></a></li>
+											<li><a class="icon brands fa-github" href="https://github.com/sabyrbekov"><span class="label">Github</span></a></li>
+											<li><a class="icon brands fa-youtube" href="https://www.youtube.com/watch?v=OiVVKITz7oA"><span class="label">Youtube</span></a></li>
+											<li><a class="icon brands fa-instagram" href="https://instagram.com/makerskg?igshid=1lim8tgunr38t"><span class="label">Instagram</span></a></li>
+											
+										</ul>
+									</section>
+
+							</div>
+						</div>
+
+						<!-- Copyright -->
+							<div id="copyright">
+								<ul class="menu">
+									<li>&copy; Untitled. All rights reserved</li><li>Design: ГУГЛ БАЙКЕ </li>
+								</ul>
+							</div>
+
+					</div>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/css/main.css' %}"></script>
+			<script src="{% static 'assets/css/main.css' %}"></script>
+			<script src="{% static 'assets/css/main.css' %}"></script>
+			<script src="{% static 'assets/css/main.css' %}"></script>
+			<script src="{% static 'assets/css/main.css' %}"></script>
+			<script src="{% static 'assets/css/main.css' %}"></script>
+			<script src="{% static 'assets/css/main.css' %}"></script>
+
+</body>
+</html>
